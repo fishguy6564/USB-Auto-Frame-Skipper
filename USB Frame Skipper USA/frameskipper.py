@@ -99,37 +99,37 @@ def increaseYear():
 #This version is developed for the USA date format. I will implement other date formats at a later date.
 def main():
 	attemptConnection()
-
 	while True:
-		try:
-			frameAmt = int(input("Please enter the amount of frames you wish to skip: "))
-			break
-		except ValueError:
-			print("Please input your frames as a whole number!")
+		while True:
+			try:
+				frameAmt = int(input("Please enter the amount of frames you wish to skip: "))
+				break
+			except ValueError:
+				print("Please input your frames as a whole number!")
 
-	while True:
-		try:
-			month, day, year = input("Please enter the current date (on your switch) in the format MM/DD/YYYY:\n").split("/")
-			currentDate = Date(int(month), int(day), int(year))
-			break
-		except:
-			print("Please input your date in the format MM/DD/YYYY!")
-	print("Performing date skipping...")
-	
-	for i in range(frameAmt - 1):
-		sendCommand("click A")
-		time.sleep(0.2)
+		while True:
+			try:
+				month, day, year = input("Please enter the current date (on your switch) in the format MM/DD/YYYY:\n").split("/")
+				currentDate = Date(int(month), int(day), int(year))
+				break
+			except:
+				print("Please input your date in the format MM/DD/YYYY!")
+		print("Performing date skipping...")
+		
+		for i in range(frameAmt - 1):
+			sendCommand("click A")
+			time.sleep(0.2)
 
-		if not currentDate.increaseDay():
-			if not currentDate.increaseMonth():
-				currentDate.increaseYear()
-				increaseYear()
+			if not currentDate.increaseDay():
+				if not currentDate.increaseMonth():
+					currentDate.increaseYear()
+					increaseYear()
+				else:
+					increaseMonth()
 			else:
-				increaseMonth()
-		else:
-			increaseDay()
-		time.sleep(0.2)
-	print("Date skipping complete!")
+				increaseDay()
+			time.sleep(0.2)
+		print("Date skipping complete!")
 	
 
 	
